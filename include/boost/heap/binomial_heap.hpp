@@ -823,10 +823,10 @@ private:
 
     void insert_node(node_list_iterator it, node_pointer n)
     {
-        if (it != trees.end())
+        if (it != trees.end()) {
             BOOST_HEAP_ASSERT(static_cast<node_pointer>(&*it)->child_count() >= n->child_count());
-
-        while(true) {
+        }
+        for(;;) {
             BOOST_HEAP_ASSERT(!n->is_linked());
             if (it == trees.end())
                 break;
