@@ -98,7 +98,10 @@ struct make_fibonacci_heap_base
 
 }
 
-
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4521) // multiple copy constructors defined
+#endif
 
 /**
  * \class fibonacci_heap
@@ -755,6 +758,10 @@ private:
     node_list_type roots;
 #endif
 };
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 } /* namespace heap */
 } /* namespace boost */
