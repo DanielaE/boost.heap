@@ -93,18 +93,18 @@ struct size_holder<false, SizeType>
     {}
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-    size_holder(size_holder && rhs)
+    size_holder(size_holder &&)
     {}
 
-    size_holder(size_holder const & rhs)
+    size_holder(size_holder const &)
     {}
 
-    size_holder & operator=(size_holder && rhs)
+    size_holder & operator=(size_holder &&)
     {
         return *this;
     }
 
-    size_holder & operator=(size_holder const & rhs)
+    size_holder & operator=(size_holder const &)
     {
         return *this;
     }
@@ -122,13 +122,13 @@ struct size_holder<false, SizeType>
     void increment()
     {}
 
-    void add(SizeType value)
+    void add(SizeType)
     {}
 
-    void sub(SizeType value)
+    void sub(SizeType)
     {}
 
-    void swap(size_holder & rhs)
+    void swap(size_holder &)
     {}
 };
 

@@ -42,7 +42,7 @@ typedef bi::list<heap_node_base<false> > heap_node_list;
 struct nop_disposer
 {
     template <typename T>
-    void operator()(T * n)
+    void operator()(T *)
     {
         BOOST_HEAP_ASSERT(false);
     }
@@ -118,6 +118,8 @@ struct node_cloner
     }
 
 private:
+    node_cloner& operator=(const node_cloner&);
+
     Alloc & allocator;
 };
 
@@ -147,6 +149,9 @@ struct node_disposer
     }
 
     Alloc & alloc_;
+
+private:
+    node_disposer& operator=(const node_disposer&);
 };
 
 
@@ -253,6 +258,8 @@ struct parent_pointing_heap_node:
         }
 
     private:
+        node_cloner& operator=(const node_cloner&);
+
         Alloc & allocator;
         parent_pointing_heap_node * parent_;
     };

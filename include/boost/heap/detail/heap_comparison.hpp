@@ -33,7 +33,7 @@ bool value_equality(Heap1 const & lhs, Heap2 const & rhs,
 
     // if this assertion is triggered, the value_compare objects of lhs and rhs return different values
     BOOST_ASSERT((ret == (!(rhs.value_comp()(lval, rval)) && !(rhs.value_comp()(rval, lval)))));
-
+    (void)rhs;
     return ret;
 }
 
@@ -46,6 +46,7 @@ bool value_compare(Heap1 const & lhs, Heap2 const & rhs,
 
     // if this assertion is triggered, the value_compare objects of lhs and rhs return different values
     BOOST_ASSERT((ret == rhs.value_comp()(lval, rval)));
+    (void)rhs;
     return ret;
 }
 
