@@ -40,10 +40,10 @@ struct PriorityQueue:
         c.clear();
         a = c.get_allocator();
 
-        typename PriorityQueue::value_type v;
-        c.push(v);
+        typename PriorityQueue::value_type v_;
+        c.push(v_);
 
-        v = c.top();
+        v_ = c.top();
         c.pop();
 
         cmp = c.value_comp();
@@ -68,8 +68,8 @@ struct MergablePriorityQueue:
 {
     BOOST_CONCEPT_USAGE(MergablePriorityQueue)
     {
-        C c, c2;
-        c.merge(c2);
+        C c_, c2_;
+        c_.merge(c2_);
     }
 };
 
@@ -84,12 +84,12 @@ struct MutablePriorityQueue:
     {
         BOOST_CONCEPT_ASSERT((boost::Assignable<typename MutablePriorityQueue::handle_type>));
 
-        typename MutablePriorityQueue::value_type v;
-        typename MutablePriorityQueue::handle_type h  = c.push(v);
-        typename MutablePriorityQueue::handle_type h2 = c.push(v);
-        c.update(h, v);
-        c.increase(h, v);
-        c.decrease(h, v);
+        typename MutablePriorityQueue::value_type v_;
+        typename MutablePriorityQueue::handle_type h  = c.push(v_);
+        typename MutablePriorityQueue::handle_type h2 = c.push(v_);
+        c.update(h, v_);
+        c.increase(h, v_);
+        c.decrease(h, v_);
 
         c.update(h);
         c.increase(h);

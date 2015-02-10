@@ -33,6 +33,11 @@
 #endif
 #endif
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 namespace boost  {
 namespace heap   {
 namespace detail {
@@ -61,7 +66,7 @@ struct parent_holder
 template <typename node_pointer>
 struct parent_holder<node_pointer, false>
 {
-    void set_parent(node_pointer parent)
+    void set_parent(node_pointer)
     {}
 
     node_pointer get_parent(void) const
@@ -974,6 +979,10 @@ private:
 
 } /* namespace heap */
 } /* namespace boost */
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #undef BOOST_HEAP_ASSERT
 #endif /* BOOST_HEAP_SKEW_HEAP_HPP */

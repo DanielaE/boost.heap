@@ -42,7 +42,7 @@ typedef bi::list<heap_node_base<false> > heap_node_list;
 struct nop_disposer
 {
     template <typename T>
-    void operator()(T * n)
+    void operator()(T *)
     {
         BOOST_HEAP_ASSERT(false);
     }
