@@ -34,6 +34,11 @@
 #endif
 #endif
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 namespace boost  {
 namespace heap   {
 namespace detail {
@@ -98,7 +103,10 @@ struct make_fibonacci_heap_base
 
 }
 
-
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4521) // multiple copy constructors defined
+#endif
 
 /**
  * \class fibonacci_heap
@@ -756,8 +764,16 @@ private:
 #endif
 };
 
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
+
 } /* namespace heap */
 } /* namespace boost */
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #undef BOOST_HEAP_ASSERT
 

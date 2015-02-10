@@ -15,6 +15,11 @@
 #include <boost/iterator/iterator_adaptor.hpp>
 #include <queue>
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 namespace boost  {
 namespace heap   {
 namespace detail {
@@ -57,7 +62,7 @@ template <typename HandleType,
          >
 struct unordered_tree_iterator_storage
 {
-    unordered_tree_iterator_storage(ValueCompare const & cmp)
+    unordered_tree_iterator_storage(ValueCompare const &)
     {}
 
     void push(HandleType h)
@@ -264,10 +269,10 @@ private:
     void discover_nodes(const Node * n)
     {
         for (typename Node::const_child_iterator it = n->children.begin(); it != n->children.end(); ++it) {
-            const Node * n = PointerExtractor::operator()(it);
-            if (check_null_pointer && n == NULL)
+            const Node * nn = PointerExtractor::operator()(it);
+            if (check_null_pointer && nn == NULL)
                 continue;
-            unvisited_nodes.push(n);
+            unvisited_nodes.push(nn);
         }
     }
 
@@ -373,5 +378,9 @@ public:
 } /* namespace detail */
 } /* namespace heap */
 } /* namespace boost */
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #endif /* BOOST_HEAP_DETAIL_TREE_ITERATOR_HPP */

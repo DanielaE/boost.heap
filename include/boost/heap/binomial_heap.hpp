@@ -32,6 +32,12 @@
 #endif
 #endif
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+# pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost  {
 namespace heap   {
 namespace detail {
@@ -823,10 +829,10 @@ private:
 
     void insert_node(node_list_iterator it, node_pointer n)
     {
-        if (it != trees.end())
+        if (it != trees.end()) {
             BOOST_HEAP_ASSERT(static_cast<node_pointer>(&*it)->child_count() >= n->child_count());
-
-        while(true) {
+        }
+        for(;;) {
             BOOST_HEAP_ASSERT(!n->is_linked());
             if (it == trees.end())
                 break;
@@ -928,6 +934,10 @@ private:
 
 } /* namespace heap */
 } /* namespace boost */
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #undef BOOST_HEAP_ASSERT
 
