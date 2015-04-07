@@ -17,6 +17,10 @@
 #pragma once
 #endif
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
 
 namespace boost  {
 namespace heap   {
@@ -126,5 +130,9 @@ void heap_merge(Heap1 & lhs, Heap2 & rhs)
 
 } /* namespace heap */
 } /* namespace boost */
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #endif /* BOOST_HEAP_MERGE_HPP */
