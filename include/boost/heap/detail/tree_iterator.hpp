@@ -15,6 +15,11 @@
 #include <boost/iterator/iterator_adaptor.hpp>
 #include <queue>
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 namespace boost  {
 namespace heap   {
 namespace detail {
@@ -373,5 +378,9 @@ public:
 } /* namespace detail */
 } /* namespace heap */
 } /* namespace boost */
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #endif /* BOOST_HEAP_DETAIL_TREE_ITERATOR_HPP */

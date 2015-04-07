@@ -17,6 +17,10 @@
 #include "stable_heap_tests.hpp"
 #include "merge_heap_tests.hpp"
 
+#ifdef BOOST_MSVC
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 template <bool stable>
 void run_common_priority_queue_tests(void)
 {

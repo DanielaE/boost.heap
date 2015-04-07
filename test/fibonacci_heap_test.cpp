@@ -18,6 +18,9 @@
 #include "mutable_heap_tests.hpp"
 #include "merge_heap_tests.hpp"
 
+#ifdef BOOST_MSVC
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
 
 template <bool stable, bool constant_time_size>
 void run_fibonacci_heap_test(void)

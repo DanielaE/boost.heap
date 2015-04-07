@@ -22,6 +22,9 @@
 #include "mutable_heap_tests.hpp"
 #include "merge_heap_tests.hpp"
 
+#ifdef BOOST_MSVC
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
 
 template <int D, bool stable>
 void run_d_ary_heap_test(void)

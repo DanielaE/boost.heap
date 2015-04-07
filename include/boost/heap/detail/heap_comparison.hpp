@@ -20,6 +20,11 @@
 #define BOOST_HEAP_ASSERT(expression)
 #endif
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 namespace boost  {
 namespace heap   {
 namespace detail {
@@ -240,6 +245,9 @@ bool heap_compare(Heap1 const & lhs, Heap2 const & rhs)
 } /* namespace heap */
 } /* namespace boost */
 
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #undef BOOST_HEAP_ASSERT
 
