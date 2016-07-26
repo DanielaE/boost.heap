@@ -269,10 +269,10 @@ private:
     void discover_nodes(const Node * n)
     {
         for (typename Node::const_child_iterator it = n->children.begin(); it != n->children.end(); ++it) {
-            const Node * n = PointerExtractor::operator()(it);
-            if (check_null_pointer && n == NULL)
+            const Node * nn = PointerExtractor::operator()(it);
+            if (check_null_pointer && nn == NULL)
                 continue;
-            unvisited_nodes.push(n);
+            unvisited_nodes.push(nn);
         }
     }
 
