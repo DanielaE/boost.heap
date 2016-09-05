@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <vector>
+#include <random>
 
 #include <boost/concept/assert.hpp>
 #include <boost/concept_archetype.hpp>
@@ -18,6 +19,15 @@
 
 #include <boost/heap/heap_concepts.hpp>
 
+namespace boost {
+namespace detail {
+
+inline std::random_device & get_common_random_device() {
+	static std::random_device generator;
+	return generator;
+}
+
+}}
 
 typedef boost::default_constructible_archetype<
         boost::less_than_comparable_archetype<
@@ -132,7 +142,7 @@ void pri_queue_test_random_push(void)
         test_data data = make_test_data(i);
 
         test_data shuffled (data);
-        std::random_shuffle(shuffled.begin(), shuffled.end());
+        std::shuffle(shuffled.begin(), shuffled.end(), std::default_random_engine(::boost::detail::get_common_random_device()()));
 
         fill_q(q, shuffled);
 
@@ -211,7 +221,7 @@ void pri_queue_test_swap(void)
         pri_queue q;
         test_data data = make_test_data(i);
         test_data shuffled (data);
-        std::random_shuffle(shuffled.begin(), shuffled.end());
+        std::shuffle(shuffled.begin(), shuffled.end(), std::default_random_engine(::boost::detail::get_common_random_device()()));
         fill_q(q, shuffled);
 
         pri_queue r;
@@ -229,7 +239,7 @@ void pri_queue_test_iterators(void)
     for (int i = 0; i != test_size; ++i) {
         test_data data = make_test_data(test_size);
         test_data shuffled (data);
-        std::random_shuffle(shuffled.begin(), shuffled.end());
+        std::shuffle(shuffled.begin(), shuffled.end(), std::default_random_engine(::boost::detail::get_common_random_device()()));
         pri_queue q;
         BOOST_REQUIRE(q.begin() == q.end());
         fill_q(q, shuffled);
@@ -258,7 +268,7 @@ void pri_queue_test_ordered_iterators(void)
     for (int i = 0; i != test_size; ++i) {
         test_data data = make_test_data(i);
         test_data shuffled (data);
-        std::random_shuffle(shuffled.begin(), shuffled.end());
+        std::shuffle(shuffled.begin(), shuffled.end(), std::default_random_engine(::boost::detail::get_common_random_device()()));
         pri_queue q;
         BOOST_REQUIRE(q.ordered_begin() == q.ordered_end());
         fill_q(q, shuffled);
