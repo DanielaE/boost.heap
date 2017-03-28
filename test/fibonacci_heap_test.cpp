@@ -6,6 +6,11 @@
     http://www.boost.org/LICENSE_1_0.txt)
 =============================================================================*/
 
+#ifdef _MSC_VER
+# pragma warning(disable: 4127) // conditional expression is constant
+# pragma warning(disable: 4389) // conditional expression is constant
+#endif
+
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 
@@ -17,10 +22,6 @@
 #include "stable_heap_tests.hpp"
 #include "mutable_heap_tests.hpp"
 #include "merge_heap_tests.hpp"
-
-#ifdef BOOST_MSVC
-# pragma warning(disable: 4127) // conditional expression is constant
-#endif
 
 template <bool stable, bool constant_time_size>
 void run_fibonacci_heap_test(void)

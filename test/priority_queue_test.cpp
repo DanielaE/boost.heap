@@ -6,6 +6,11 @@
     http://www.boost.org/LICENSE_1_0.txt)
 =============================================================================*/
 
+#ifdef _MSC_VER
+# pragma warning(disable: 4127) // conditional expression is constant
+# pragma warning(disable: 4389) // conditional expression is constant
+#endif
+
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 
@@ -16,10 +21,6 @@
 #include "common_heap_tests.hpp"
 #include "stable_heap_tests.hpp"
 #include "merge_heap_tests.hpp"
-
-#ifdef BOOST_MSVC
-# pragma warning(disable: 4127) // conditional expression is constant
-#endif
 
 template <bool stable>
 void run_common_priority_queue_tests(void)
