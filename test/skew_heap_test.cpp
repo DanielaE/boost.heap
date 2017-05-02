@@ -6,6 +6,11 @@
     http://www.boost.org/LICENSE_1_0.txt)
 =============================================================================*/
 
+#ifdef _MSC_VER
+# pragma warning(disable: 4127) // conditional expression is constant
+# pragma warning(disable: 4389) // signed/unsigned mismatch
+#endif
+
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 
