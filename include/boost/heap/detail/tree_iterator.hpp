@@ -85,7 +85,11 @@ struct unordered_tree_iterator_storage
         return data_.empty();
     }
 
+#ifdef BOOST_NO_CXX11_ALLOCATOR
     std::vector<HandleType, typename Alloc::template rebind<HandleType>::other > data_;
+#else
+    std::vector<HandleType, typename std::allocator_traits<Alloc>::template rebind_alloc<HandleType> > data_;
+#endif
 };
 
 template <typename ValueType,
@@ -138,7 +142,11 @@ struct ordered_tree_iterator_storage:
     }
 
     std::priority_queue<HandleType,
+#ifdef BOOST_NO_CXX11_ALLOCATOR
                         std::vector<HandleType, typename Alloc::template rebind<HandleType>::other>,
+#else
+                        std::vector<HandleType, typename std::allocator_traits<Alloc>::template rebind_alloc<HandleType> >,
+#endif
                         compare_values_by_handle> data_;
 };
 
